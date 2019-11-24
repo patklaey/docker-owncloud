@@ -48,7 +48,7 @@ follow those steps:
 1. Import the database backup
     ```bash
     source .env
-    docker exec owncloud-db sh -c "mysql -u ${DB_USERNAME} --password=${DB_PASSWORD} ${DB_NAME} < /root/owncloud-utf.sql"  
+    docker exec owncloud-db sh -c "mysql --default-character-set=latin1 -u ${DB_USERNAME} --password=${DB_PASSWORD} ${DB_NAME} < /root/owncloud-utf.sql"  
     ```
 1. Upgrade the database if necessary (see also [Troubleshooting](#troubleshooting) as there are some common issues with 
 the upgrade)
