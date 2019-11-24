@@ -79,7 +79,7 @@ you see the following:
     docker exec owncloud-web occ app:disable files_texteditor
     docker exec owncloud-web occ app:disable templateeditor  
     ```
-* A common problem seems to the the 
+* A common problem seems to be the 
 ```Doctrine\DBAL\Schema\SchemaException: The table with name 'owncloud.oc_persistent_locks' already exists.``` error. 
 Luckily it can be easily fixed by simply deleting that table from the database:
     ```bash
