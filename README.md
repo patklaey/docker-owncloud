@@ -1,7 +1,9 @@
 # Docker Owncloud installation on ARM
 
 This guide assumes that you have a folder /home/owncloud that stores your files on the host and not within the docker
-image
+image. 
+
+See also [official documentation](https://doc.owncloud.com/server/admin_manual/installation/docker/#upgrading-owncloud-on-docker)
 
 
 ## Install from scratch
@@ -98,4 +100,45 @@ Luckily it can be easily fixed by simply deleting that table from the database:
     the database nor the config written by the installer: 
     ```bash
     docker exec owncloud-web ln -s /mnt/data/files/ /home/owncloud
+    ```
+    
+## Upgrade owncloud
+
+See also the [official documentation](https://doc.owncloud.org/server/10.4/admin_manual/installation/docker/)
+
+Versions can be checked [here](https://github.com/owncloud-docker/server)
+
+1. Put owncloud into maintenance mode: 
+    ```bash
+    docker-compose exec owncloud occ maintenance:mode --on
+    ```
+1. Backup the DB (on the backup volume of the container under ```/var/lib/backup```)
+    ```bash
+    docker-compose exec db backup
+    ```
+1. If you want to be 100% sure, also backup the DB to the local FS (well, also the backup from the previous step put
+the DB backup to the local FS)
+    ```bash
+    source .env
+    docker exec owncloud-db sh -c "mysqldump -u ${DB_USERNAME} --password=${DB_PASSWORD} --opt --quote-names --skip-set-charset --default-character-set=latin1 ${DB_NAME} > /backup/owncloud-utf.sql"
+    ```
+1. Shutdown the containers
+    ```bash
+    docker-compose down
+    ```
+1. Change the version in the ```.env``` file
+    ```bash
+    vi .env
+    ```
+1. Start the containers again
+    ```bash
+    docker-compose up -d
+    ```
+1. When starting the owncloud-web container, it should automatically run ```occ upgrade```, follow the process
+    ```bash
+    docker logs -f owncloud-web
+    ```
+1. If everything is ok, disable maintenance mode
+    ```bash
+    docker-compose exec owncloud occ maintenance:mode --off
     ```
