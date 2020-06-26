@@ -17,6 +17,7 @@ Follow those simple steps:
     ```
 1. Modify the ```.env``` file to change passwords
     ```bash
+    cp .env-template .env
     vi .env
     ```
 1. Start up the containers
@@ -37,6 +38,7 @@ follow those steps:
     ```
 1. Modify the ```.env``` file to change passwords
     ```bash
+    cp .env-template .env
     vi .env
     ```
 1. Start up the containers
