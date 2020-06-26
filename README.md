@@ -130,13 +130,9 @@ the DB backup to the local FS)
     ```bash
     vi .env
     ```
-1. Start the containers again
+1. Start the containers again, ```occ upgrade``` should be started automatically
     ```bash
-    docker-compose up -d
-    ```
-1. When starting the owncloud-web container, it should automatically run ```occ upgrade```, follow the process
-    ```bash
-    docker logs -f owncloud-web
+    docker-compose up -d && docker logs -f owncloud-web
     ```
 1. If everything is ok, disable maintenance mode
     ```bash
