@@ -136,6 +136,10 @@ the DB backup to the local FS)
     ```bash
     docker-compose up -d && docker logs -f owncloud-web
     ```
+1. Recreate the symlink for correct file access if you need to (see [Troubleshooting](#troubleshooting) - 404 error):
+    ```bash
+    docker exec owncloud-web ln -s /mnt/data/files/ /home/owncloud
+    ```
 1. If everything is ok, disable maintenance mode
     ```bash
     docker-compose exec owncloud occ maintenance:mode --off
