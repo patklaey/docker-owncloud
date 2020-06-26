@@ -39,7 +39,7 @@ services:
       retries: 5
     volumes:
       - files:/mnt/data
-      - /home/owncloud/pat:/mnt/data/files/pat
+      - /data/owncloud:/mnt/data/files/
 
   db:
     image: webhippie/mariadb:latest
