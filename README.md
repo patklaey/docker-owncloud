@@ -122,7 +122,7 @@ Versions can be checked [here](https://github.com/owncloud-docker/server)
 the DB backup to the local FS)
     ```bash
     source .env
-    docker exec owncloud-db sh -c "mysqldump -u ${DB_USERNAME} --password=${DB_PASSWORD} --opt --quote-names --skip-set-charset --default-character-set=latin1 ${DB_NAME} > /backup/owncloud-utf.sql"
+    docker exec owncloud-db sh -c "mysqldump -u ${DB_USERNAME} --password=${DB_PASSWORD} --opt --quote-names --skip-set-charset --default-character-set=latin1 ${DB_NAME} > /backup/owncloud-utf-pre-upgrade.sql"
     ```
 1. Shutdown the containers
     ```bash
