@@ -32,6 +32,7 @@ services:
       - OWNCLOUD_MYSQL_UTF8MB4=true
       - OWNCLOUD_REDIS_ENABLED=true
       - OWNCLOUD_REDIS_HOST=redis
+      - OWNCLOUD_TRUSTED_DOMAINS=${OWNCLOUD_DOMAIN},cloud.patklaey.ch
     healthcheck:
       test: ["CMD", "/usr/bin/healthcheck"]
       interval: 30s
