@@ -124,21 +124,13 @@ the DB backup to the local FS)
     source .env
     docker exec owncloud-db sh -c "mysqldump -u ${DB_USERNAME} --password=${DB_PASSWORD} --opt --quote-names --skip-set-charset --default-character-set=latin1 ${DB_NAME} > /backup/owncloud-utf-pre-upgrade.sql"
     ```
-1. Shutdown the containers
-    ```bash
-    docker-compose down
-    ```
 1. Change the version in the ```.env``` file
     ```bash
     vi .env
     ```
 1. Start the containers again, ```occ upgrade``` should be started automatically
     ```bash
-    docker-compose up -d && docker logs -f owncloud-web
-    ```
-1. Recreate the symlink for correct file access if you need to (see [Troubleshooting](#troubleshooting) - 404 error):
-    ```bash
-    docker exec owncloud-web ln -s /mnt/data/files/ /home/owncloud
+    docker-compose up -d --force-recreate && docker logs -f owncloud-web
     ```
 1. If everything is ok, disable maintenance mode
     ```bash
